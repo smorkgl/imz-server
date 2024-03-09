@@ -1,11 +1,7 @@
-import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import mongoose from "mongoose";
-import { registerValidation } from "../validations/auth.js";
 import { validationResult } from "express-validator";
 import UserModel from "../models/Users.js";
-import checkAuth from "../utils/checkAuth.js";
 
 export const register = async (req, res) => {
   try {
@@ -110,9 +106,6 @@ export const authme = async (req, res) => {
     const { passwordHash, ...userData } = user._doc;
 
     res.json(userData);
-    res.json({
-      success: true,
-    });
   } catch (err) {
     res.status(500).json({
       message: "Нет доступа",
