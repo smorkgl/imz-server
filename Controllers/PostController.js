@@ -2,33 +2,66 @@ import Post from "../models/Post.js";
 import PostModel from "../models/Post.js";
 import { validationResult } from "express-validator";
 
-export const remove = async (req, res) => {
+export const updatePost = async (req, res) => {
   try {
     const postId = req.params.id;
 
-    PostModel.findOneAndDelete(
+    await PostModel.updateOne(
       {
         _id: postId,
+      },
+      {
+        title: req.body.title,
+        description: req.body.description,
+        imageUrl: req.body.imageUrl,
+        date: req.body.date,
+        user: req.userId,
+        viewCount: req.viewCount,
       }
-        .then((doc) => {
-          if (!doc) {
-            return req.status(404).json({
-              message: "Новость не найдена",
-            });
-          }
-          res.json({
-            success: true,
+    )
+      .then(() => {
+        res.json({
+          success: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json({
+          message: "Данной статьи не существует",
+        });
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Ошибка при обновлении новости",
+    });
+  }
+};
+
+export const removePost = async (req, res) => {
+  try {
+    const postId = req.params.id;
+
+    await PostModel.findOneAndDelete({
+      _id: postId,
+    })
+      .then(() => {
+        res.json({
+          message: "Новость успешно удалена",
+          postId: postId,
+        });
+      })
+      .catch((err, doc) => {
+        if (!doc) {
+          return res.status(404).json({
+            message: "Новость не найдена",
           });
-        })
-        .catch((err) => {
-          if (err) {
-            console.log(err);
-            return res.status(500).json({
-              message: "Не удалось удалить новость",
-            });
-          }
-        })
-    );
+        }
+        console.log(err);
+        return res.status(500).json({
+          message: "Не удалось удалить новость",
+        });
+      });
   } catch (err) {
     console.log(err);
     res.status(500).json({
@@ -41,7 +74,7 @@ export const getOne = async (req, res) => {
   try {
     const postId = req.params.id;
 
-    PostModel.findOneAndUpdate(
+    await PostModel.findOneAndUpdate(
       {
         _id: postId,
       },
@@ -56,7 +89,7 @@ export const getOne = async (req, res) => {
     )
       .then((doc) => {
         if (!doc) {
-          return req.status(404).json({
+          return res.status(404).json({
             message: "Новость не найдена",
           });
         }

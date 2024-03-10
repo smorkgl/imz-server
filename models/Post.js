@@ -1,4 +1,8 @@
 import mongoose from "mongoose";
+import autoIncrement from "@alec016/mongoose-autoincrement";
+
+const connection = mongoose.connection;
+autoIncrement.initialize(connection);
 
 const PostSchema = new mongoose.Schema(
   {
@@ -8,6 +12,10 @@ const PostSchema = new mongoose.Schema(
       unique: true,
     },
     description: {
+      type: String,
+      required: true,
+    },
+    fulldescription: {
       type: String,
       required: true,
     },
@@ -30,5 +38,7 @@ const PostSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+PostSchema.plugin(autoIncrement.plugin, "PostID");
 
 export default mongoose.model("Post", PostSchema);
