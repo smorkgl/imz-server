@@ -22,7 +22,7 @@ export const postValidation = [
     min: 10,
     max: 50,
   }),
-  body("fulldescription", "Введите полное описание статьи").isLength({
+  body("full_description", "Введите полное описание статьи").isLength({
     min: 10,
     max: 500,
   }),

@@ -13,6 +13,7 @@ export const updatePost = async (req, res) => {
       {
         title: req.body.title,
         description: req.body.description,
+        full_description: req.body.full_description,
         imageUrl: req.body.imageUrl,
         date: req.body.date,
         user: req.userId,
@@ -143,6 +144,7 @@ export const createPost = async (req, res) => {
     const doc = new PostModel({
       title: req.body.title,
       description: req.body.description,
+      full_description: req.body.full_description,
       date: req.body.date,
       imageUrl: req.body.imageUrl,
       user: req.userId,

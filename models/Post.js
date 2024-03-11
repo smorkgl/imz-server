@@ -15,7 +15,7 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    fulldescription: {
+    full_description: {
       type: String,
       required: true,
     },
