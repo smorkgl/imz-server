@@ -22,10 +22,6 @@ export const postValidation = [
     min: 10,
     max: 50,
   }),
-  body("full_description", "Введите полное описание статьи").isLength({
-    min: 10,
-    max: 500,
-  }),
   body("date", "Неверная дата публикации").isLength({ min: 3 }),
   body("imageUrl", "Неверная ссылка на изображение").optional().isString(),
 ];
