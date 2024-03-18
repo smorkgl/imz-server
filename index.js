@@ -65,13 +65,6 @@ app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
   });
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.listen(3131, (err) => {
-  if (err) {
-    return console.log(err);
-  }
-  console.log("Server OK");
+app.listen(3131, function () {
+  console.log("Listening to port:  " + 3131);
 });
