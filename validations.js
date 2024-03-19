@@ -20,7 +20,6 @@ export const postValidation = [
   body("title", "Введите заголовок статьи").isLength({ min: 3 }).isString(),
   body("description", "Введите описание статьи").isLength({
     min: 10,
-    max: 50,
   }),
   body("date", "Неверная дата публикации").isLength({ min: 3 }),
   body("imageUrl", "Неверная ссылка на изображение").optional().isString(),
