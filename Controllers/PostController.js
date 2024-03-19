@@ -8,7 +8,7 @@ export const updatePost = async (req, res) => {
 
     await PostModel.updateOne(
       {
-        _id: postId,
+        id: postId,
       },
       {
         title: req.body.title,
@@ -43,7 +43,7 @@ export const removePost = async (req, res) => {
     const postId = req.params.id;
 
     await PostModel.findOneAndDelete({
-      _id: postId,
+      id: postId,
     })
       .then(() => {
         res.json({
@@ -76,7 +76,7 @@ export const getOne = async (req, res) => {
 
     await PostModel.findOneAndUpdate(
       {
-        _id: postId,
+        id: postId,
       },
       {
         $inc: {
