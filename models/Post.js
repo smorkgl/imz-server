@@ -11,6 +11,11 @@ const PostSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    mini_title: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     description: {
       type: String,
       required: true,

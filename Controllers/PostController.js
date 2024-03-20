@@ -12,6 +12,7 @@ export const updatePost = async (req, res) => {
       },
       {
         title: req.body.title,
+        mini_title: req.body.mini_title,
         description: req.body.description,
         imageUrl: req.body.imageUrl,
         date: req.body.date,
@@ -142,6 +143,7 @@ export const createPost = async (req, res) => {
 
     const doc = new PostModel({
       title: req.body.title,
+      mini_title: req.body.mini_title,
       description: req.body.description,
       date: req.body.date,
       imageUrl: req.body.imageUrl,

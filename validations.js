@@ -18,6 +18,9 @@ export const registerValidation = [
 
 export const postValidation = [
   body("title", "Введите заголовок статьи").isLength({ min: 3 }).isString(),
+  body("mini_title", "Введите заголовок мини_статьи")
+    .isLength({ min: 3, max: 50 })
+    .isString(),
   body("description", "Введите описание статьи").isLength({
     min: 10,
   }),
