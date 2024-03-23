@@ -59,7 +59,7 @@ app.get("/posts/:id", checkAuth, PostController.getOne);
 app.post("/posts/", checkAuth, postValidation, PostController.createPost);
 app.delete("/posts/:id", checkAuth, PostController.removePost);
 app.patch("/posts/:id", checkAuth, postValidation, PostController.updatePost);
-app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
+app.post("/upload", upload.single("image"), (req, res) => {
   res.json({
     url: `uploads/${req.file.originalname}`,
   });
