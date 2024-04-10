@@ -10,6 +10,8 @@ import {
 import { checkAuth, handleValidationErrors } from "./utils/index.js";
 import { UserController, PostController } from "./Controllers/index.js";
 
+const { MONGODB_URI } = process.env;
+
 mongoose
   .connect("process.env.MONGODB_URI")
   .then(() => console.log("DB ok"))
@@ -64,8 +66,5 @@ app.post("/upload", upload.single("image"), (req, res) => {
 });
 
 app.listen(process.env.PORT || 3131, function () {
-  if (err) {
-    return console.log(err);
-  }
   console.log("Server OK");
 });
