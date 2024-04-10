@@ -11,9 +11,7 @@ import { checkAuth, handleValidationErrors } from "./utils/index.js";
 import { UserController, PostController } from "./Controllers/index.js";
 
 mongoose
-  .connect(
-    "mongodb+srv://catosrak:210976nL@test.qt168zu.mongodb.net/?retryWrites=true&w=majority&appName=test"
-  )
+  .connect("process.env.MONGODB_URI")
   .then(() => console.log("DB ok"))
   .catch((err) => console.log("DB error", err));
 
@@ -66,5 +64,8 @@ app.post("/upload", upload.single("image"), (req, res) => {
 });
 
 app.listen(3131, function () {
-  console.log("Listening to port:  " + 3131);
+  if (err) {
+    return console.log(err);
+  }
+  console.log("Server OK");
 });
