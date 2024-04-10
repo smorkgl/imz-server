@@ -34,7 +34,11 @@ const upload = multer({
 });
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://new.i-m-z.ru",
+  })
+);
 app.use("/uploads", express.static("uploads"));
 
 app.post(
