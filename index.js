@@ -1,5 +1,6 @@
 import multer from "multer";
 import express from "express";
+import fs from "fs";
 import mongoose from "mongoose";
 import cors from "cors";
 import {
@@ -65,6 +66,6 @@ app.post("/upload", upload.single("image"), (req, res) => {
   });
 });
 
-app.listen(3131, function () {
-  console.log("Listening to port:  " + 3131);
+app.listen(process.env.PORT || 3131, function () {
+  console.log("Server OK");
 });
