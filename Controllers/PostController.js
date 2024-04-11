@@ -117,7 +117,10 @@ export const getAll = async (req, res) => {
       return res.status(400).json(errors.array());
     }
 
-    const posts = await PostModel.find().populate("user").exec();
+    const posts = await PostModel.find().populate({
+      path: "user",
+      select: ["name", "avatar"],
+    });
 
     res.json(posts);
 

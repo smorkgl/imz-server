@@ -20,10 +20,7 @@ mongoose
 const app = express();
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
-    if (!fs.existsSync("uploads")) {
-      fs.mkdirSync("uploads");
-    }
-    cb(null, path.resolve("./public/uploads"));
+    cb(null, "./uploads");
   },
   filename: (_, file, cb) => {
     cb(null, file.originalname);
@@ -35,11 +32,7 @@ const upload = multer({
 });
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://new.i-m-z.ru",
-  })
-);
+app.use(cors());
 app.use("/uploads", express.static("uploads"));
 
 app.post(
