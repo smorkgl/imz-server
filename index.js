@@ -18,7 +18,6 @@ mongoose
   .catch((err) => console.log("DB error", err));
 
 const app = express();
-console.log("test");
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
     if (!fs.existsSync("uploads")) {
