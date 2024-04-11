@@ -1,13 +1,13 @@
 import jwt from "jsonwebtoken";
-import bcryptjs from "bcryptjs";
+import bcrypt from "bcryptjs";
 import UserModel from "../models/Users.js";
 
 export const register = async (req, res) => {
   try {
     //  Шифрование паролей
     const password = req.body.password;
-    const salt = await bcryptjs.genSalt(10);
-    const hash = await bcryptjs.hash(password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
 
     //  Объявляем модель
     const doc = new UserModel({
