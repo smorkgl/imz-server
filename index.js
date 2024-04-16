@@ -10,6 +10,8 @@ import {
 import { checkAuth, handleValidationErrors } from "./utils/index.js";
 import { UserController, PostController } from "./Controllers/index.js";
 import EasyYandexS3 from "easy-yandex-s3";
+import path from "path";
+import { fileURLToPath } from "url";
 
 let s3 = new EasyYandexS3({
   auth: {
@@ -19,6 +21,9 @@ let s3 = new EasyYandexS3({
   Bucket: "imz", // Название бакета
   debug: false, // Дебаг в консоли
 });
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 mongoose
   .connect(
@@ -32,6 +37,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(multer().any());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.post(
   "/auth/register",
