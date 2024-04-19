@@ -72,6 +72,28 @@ app.post("/upload", async (req, res) => {
     res.status(500).json({ message: "Ошибка при загрузке файла" });
   }
 });
+// Фотогалерея
+app.post("/uploadFile", async (req, res) => {
+  try {
+    let buffer = req.files[0].buffer; // Буфер загруженног  о файла
+    let upload = await s3.Upload({ buffer }, "/files/images/"); // Загрузка в бакет
+    res.json({ url: upload.Location }); // Ответ сервера - URL загруженного файла
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Ошибка при загрузке файла" });
+  }
+});
+app.post("/deleteFile", async (req, res) => {
+  try {
+    const key = req.body.key; // Получите ключ/имя файла для удаления
+    let remove = await s3.Remove(key);
+
+    res.json({ success: true }); // Ответ сервера - файл успешно удален
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Ошибка при удалении файла" });
+  }
+});
 
 app.listen(3131, function () {
   console.log("Server OK");
