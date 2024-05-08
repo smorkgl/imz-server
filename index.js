@@ -66,7 +66,11 @@ app.post("/upload", async (req, res) => {
   try {
     let buffer = req.files[0].buffer; // Буфер загруженного файла
     let upload = await s3.Upload({ buffer }, "/files/"); // Загрузка в бакет
-    res.json({ url: upload.Location }); // Ответ сервера - URL загруженного файла
+    res.json({
+      uploaded: 1,
+      fileName: req.files[0].originalname,
+      url: upload.Location,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Ошибка при загрузке файла" });
