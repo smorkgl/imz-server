@@ -58,6 +58,7 @@ app.get(
   UserController.authme
 );
 app.get("/posts/", PostController.getAll);
+app.get("/posts4/", PostController.get4);
 app.get("/posts/:id", checkAuth, PostController.getOne);
 app.post("/posts/", checkAuth, postValidation, PostController.createPost);
 app.delete("/posts/:id", checkAuth, PostController.removePost);

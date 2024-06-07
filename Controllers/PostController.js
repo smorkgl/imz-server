@@ -137,6 +137,33 @@ export const getAll = async (req, res) => {
   }
 };
 
+export const get4 = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json(errors.array());
+    }
+
+    const posts = await PostModel.find().populate({
+      path: "user",
+      select: ["name", "avatar"],
+    });
+
+    res.json(posts.slice(-4));
+
+    if (!posts) {
+      return res.status(404).json({
+        message: "Новостей не существует",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      message: "Ошибка при получении всех новостей",
+    });
+  }
+};
+
 export const createPost = async (req, res) => {
   try {
     const errors = validationResult(req);
